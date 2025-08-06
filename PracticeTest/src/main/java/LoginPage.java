@@ -1,15 +1,16 @@
-import org.junit.After;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class Chrome {
+public class LoginPage {
     WebDriver driver;
 
     @Test
     public void StartChromeBrowser() {
-        driver = new ChromeDriver(); // Initialize ChromeDriver
+        // Initialize ChromeDriver
+        driver = new ChromeDriver();
         driver.get("https://www.saucedemo.com/v1/");
         driver.manage().window().maximize();// Maximize the browser window
         // Enter username
@@ -18,6 +19,12 @@ public class Chrome {
         driver.findElement(By.id("password")).sendKeys("secret_sauce");
         //click on login button
         driver.findElement(By.id("login-button")).click();
+
+        // Verify the title of the page
+        String ProductText = driver.findElement(By.xpath("/html/body/div/div[2]/div[2]/div/div[1]/div[3]/div")).getText();
+
+        //Validate that the title is correct
+        Assert.assertEquals("Products", ProductText);
 
 
     }
